@@ -1,21 +1,15 @@
 namespace RoleplayGame
 {
-    public class Staff
+    public class Staff : IMixedItems
     {
-        public int AttackValue 
+        public int AttackValue()
         {
-            get
-            {
-                return 100;
-            } 
+            return 100;
         }
 
-        public int DefenseValue
+        public int DefenseValue()
         {
-            get
-            {
-                return 100;
-            }
+            return 100;
         }
     }
 }

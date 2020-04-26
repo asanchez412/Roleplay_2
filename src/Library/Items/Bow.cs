@@ -1,13 +1,10 @@
 namespace RoleplayGame
 {
-    public class Bow
+    public class Bow : IAttackItems
     {
-        public int AttackValue 
+        public int AttackValue() 
         {
-            get
-            {
-                return 15;
-            } 
+            return 15;
         }
     }
 }

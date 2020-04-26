@@ -11,23 +11,51 @@ namespace Program
             book.Spells = new Spell[]{ new Spell() };
 
             Wizard gandalf = new Wizard("Gandalf");
-            gandalf.Staff = new Staff();
-            gandalf.SpellsBook = book;
+            Staff staff = new Staff(); 
+            gandalf.EquipMixedItem(staff); 
+            gandalf.EquipSpellBook(book);
+
+            Knight knight = new Knight("Knight");
+            Sword sword = new Sword();
+            Armor armor = new Armor();
+            Helmet helmet = new Helmet();
+            Shield shield = new Shield();
+            knight.EquipAttackItem(sword);
+            knight.EquipDefensiveItem(armor);
+            knight.EquipDefensiveItem(helmet);
+            knight.EquipDefensiveItem(shield);
 
             Dwarf gimli = new Dwarf("Gimli");
-            gimli.Axe = new Axe();
-            gimli.Helmet = new Helmet();
+            Axe axe = new Axe();
+            Helmet helmet1 = new Helmet();
+            gimli.EquipAttackItem(axe);
+            gimli.EquipDefensiveItem(helmet1);
 
-            Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-            Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
+            // Gandalf ataca a Gimli
 
-            gimli.ReceiveAttack(gandalf.AttackValue);
+            Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
+            Console.WriteLine($"{gandalf.Name} attacks {gimli.Name} with ⚔️ {gandalf.GetTotalAttackValue()}");
 
-            Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+            gimli.ReceiveAttack(gandalf.GetTotalAttackValue());
+
+            Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
 
             gimli.Cure();
 
-            Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+            Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
+
+            // Knight ataca a Gimli
+
+            Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
+            Console.WriteLine($"{knight.Name} attacks {gimli.Name} with ⚔️ {knight.GetTotalAttackValue()}");
+
+            gimli.ReceiveAttack(knight.GetTotalAttackValue());
+
+            Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
+
+            gimli.Cure();
+
+            Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
         }
     }
 }
