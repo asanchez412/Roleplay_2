@@ -11,9 +11,30 @@ namespace Library.Test
         }
 
         [Test]
-        public void Test1()
+        public void TestGetTotalAttackValueGandalf()
         {
-            Assert.Pass();
+           SpellsBook book = new SpellsBook();
+            book.Spells = new Spell[]{ new Spell() };
+
+            Wizard gandalf = new Wizard("Gandalf");
+            Staff staff = new Staff(); 
+            gandalf.EquipMixedItem(staff); 
+            gandalf.EquipSpellBook(book);
+            
+            Assert.AreEqual(170,gandalf.GetTotalAttackValue());
+        }
+        [Test]
+        public void TestTestGetTotalDefenseValueGandalf()
+        {
+            SpellsBook book = new SpellsBook();
+            book.Spells = new Spell[]{ new Spell() };
+
+            Wizard gandalf = new Wizard("Gandalf");
+            Staff staff = new Staff(); 
+            gandalf.EquipMixedItem(staff); 
+            gandalf.EquipSpellBook(book);
+            
+            Assert.AreEqual(170,gandalf.GetTotalDefenseValue());
         }
     }
 }
