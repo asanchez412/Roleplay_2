@@ -11,17 +11,20 @@ namespace Program
             book.Spells = new Spell[]{ new Spell() };
 
             Wizard gandalf = new Wizard("Gandalf");
-            gandalf.Staff = new Staff();
-            gandalf.SpellsBook = book;
+            Staff staff = new Staff(); 
+            gandalf.EquipMixedItem(staff); 
+            gandalf.EquipSpellBook(book);
 
             Dwarf gimli = new Dwarf("Gimli");
-            gimli.Axe = new Axe();
-            gimli.Helmet = new Helmet();
+            Axe axe = new Axe();
+            Helmet helmet = new Helmet();
+            gimli.EquipAttackItem(axe);
+            gimli.EquipDefensiveItem(helmet);
 
             Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-            Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
+            Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.GetTotalAttackValue()}");
 
-            gimli.ReceiveAttack(gandalf.AttackValue);
+            gimli.ReceiveAttack(gandalf.GetTotalAttackValue());
 
             Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
 

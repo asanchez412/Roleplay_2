@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
-    public class Dwarf
+    public class Dwarf : ICharacter
     {
         private int health = 100;
 
@@ -11,26 +13,48 @@ namespace RoleplayGame
 
         public string Name { get; set; }
 
-        public Axe Axe { get; set; }
+        private IList<IDefensiveItems> defensiveEquipment = new List<IDefensiveItems>();
 
-        public Shield Shield { get; set; }
+        private IList<IAttackItems> offensiveEquipment = new List<IAttackItems>();
 
-        public Helmet Helmet { get; set; }
-
-        public int AttackValue
+        public void EquipDefensiveItem(IDefensiveItems defensiveItem)
         {
-            get
-            {
-                return Axe.AttackValue();
-            }
+            this.defensiveEquipment.Add(defensiveItem);
         }
 
-        public int DefenseValue
+        public void UnEquipDefensiveItem(IDefensiveItems defensiveItem)
         {
-            get
+            this.defensiveEquipment.Remove(defensiveItem);
+        }
+
+        public void EquipAttackItem(IAttackItems attackItem)
+        {
+            this.offensiveEquipment.Add(attackItem);
+        }
+
+        public void UnEquipAttackItem(IAttackItems attackItem)
+        {
+            this.offensiveEquipment.Add(attackItem);
+        }
+
+        public int GetTotalAttackValue()
+        {   
+            int result = 0;
+            foreach (IAttackItems attackItem in offensiveEquipment)
             {
-                return Shield.DefenseValue() + Helmet.DefenseValue();
+                result += attackItem.AttackValue();
             }
+            return result;
+        }
+
+        public int GetTotalDefenseValue()
+        {
+            int result = 0;
+            foreach (IDefensiveItems defensiveItem in defensiveEquipment)
+            {
+                result += defensiveItem.DefenseValue();
+            }
+            return result;
         }
 
         public int Health
@@ -47,7 +71,10 @@ namespace RoleplayGame
 
         public void ReceiveAttack(int damage)
         {
-            this.Health = this.Health - damage;
+            if (damage - GetTotalDefenseValue() > 0)
+            {
+                this.Health = this.Health - damage;
+            }
         }
 
         public void Cure()
