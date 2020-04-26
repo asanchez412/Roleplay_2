@@ -71,9 +71,9 @@ namespace RoleplayGame
 
         public void ReceiveAttack(int damage)
         {
-            if (damage - GetTotalDefenseValue() > 0)
+            if (damage - this.GetTotalDefenseValue() > 0)
             {
-                this.Health = this.Health - damage;
+                this.Health = this.Health - (damage - this.GetTotalDefenseValue());
             }
         }
 
