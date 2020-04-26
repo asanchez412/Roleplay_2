@@ -13,7 +13,7 @@ namespace RoleplayGame
                 int value = 0;
                 foreach (Spell spell in this.Spells)
                 {
-                    value += spell.AttackValue;
+                    value += spell.AttackValue();
                 }
                 return value;
             }
@@ -26,7 +26,7 @@ namespace RoleplayGame
                 int value = 0;
                 foreach (Spell spell in this.Spells)
                 {
-                    value += spell.DefenseValue;
+                    value += spell.DefenseValue();
                 }
                 return value;
             }

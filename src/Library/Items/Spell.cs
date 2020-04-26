@@ -1,21 +1,15 @@
 namespace RoleplayGame
 {
-    public class Spell
+    public class Spell : IMixedItems
     {
-        public int AttackValue
+        public int AttackValue()
         {
-            get
-            {
-                return 70;
-            }
+            return 70;
         }
 
-        public int DefenseValue
+        public int DefenseValue()
         {
-            get
-            {
-                return 70;
-            }
+            return 70;
         }
     }
 }
