@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public class Spell : IMixedItems
+    public class FireSpell : ISpell
     {
         public int AttackValue()
         {

@@ -5,16 +5,11 @@ namespace Library.Test
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        public void TestGetTotalAttackValueGandalf()
+        public void TestGetTotalAttackValue()
         {
-           SpellsBook book = new SpellsBook();
-            book.Spells = new Spell[]{ new Spell() };
+            SpellsBook book = new SpellsBook();
+            FireSpell spell1 = new FireSpell();
 
             Wizard gandalf = new Wizard("Gandalf");
             Staff staff = new Staff(); 
@@ -24,10 +19,10 @@ namespace Library.Test
             Assert.AreEqual(170,gandalf.GetTotalAttackValue());
         }
         [Test]
-        public void TestTestGetTotalDefenseValueGandalf()
+        public void TestGetTotalDefenseValue()
         {
             SpellsBook book = new SpellsBook();
-            book.Spells = new Spell[]{ new Spell() };
+            WindSpell spell2 = new WindSpell();
 
             Wizard gandalf = new Wizard("Gandalf");
             Staff staff = new Staff(); 
