@@ -69,17 +69,22 @@ namespace RoleplayGame
             }
         }
 
-        public void ReceiveAttack(int damage)
+        public int ReceiveAttack(int damage)
         {
             if (damage - this.GetTotalDefenseValue() > 0)
             {
                 this.Health = this.Health - (damage - this.GetTotalDefenseValue());
+                return this.Health;
+            }
+            else
+            {
+                return this.Health;
             }
         }
 
-        public void Cure()
+        public int Cure()
         {
-            this.Health = 100;
+            return this.Health = 100;
         }
     }
 }

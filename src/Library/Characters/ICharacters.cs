@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public interface ICharacter
 {
     void EquipDefensiveItem(IDefensiveItems defensiveItem);
@@ -14,7 +12,7 @@ public interface ICharacter
 
     int GetTotalDefenseValue();
 
-    void ReceiveAttack(int damage);
+    int ReceiveAttack(int damage);
 
-    void Cure();
+    int Cure();
 }
