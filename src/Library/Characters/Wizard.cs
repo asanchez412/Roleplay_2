@@ -38,7 +38,7 @@ namespace RoleplayGame
 
         public void UnEquipAttackItem(IAttackItems attackItem)
         {
-            this.offensiveEquipment.Add(attackItem);
+            this.offensiveEquipment.Remove(attackItem);
         }
 
         public void EquipMixedItem(IMixedItems mixedItem)

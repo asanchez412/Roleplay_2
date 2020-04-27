@@ -34,7 +34,7 @@ namespace RoleplayGame
 
         public void UnEquipAttackItem(IAttackItems attackItem)
         {
-            this.offensiveEquipment.Add(attackItem);
+            this.offensiveEquipment.Remove(attackItem);
         }
 
         public int GetTotalAttackValue()
