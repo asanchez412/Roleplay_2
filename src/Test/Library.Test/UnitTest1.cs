@@ -9,11 +9,11 @@ namespace Library.Test
         public void TestGetTotalAttackValue()
         {
             SpellsBook book = new SpellsBook();
-            FireSpell spell1 = new FireSpell();
+            ISpell spell1 = new FireSpell();
             book.AddSpell(spell1);
 
             Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff(); 
+            IMixedItems staff = new RunicStaff(); 
             gandalf.EquipMixedItem(staff); 
             gandalf.EquipSpellBook(book);
             
@@ -32,11 +32,11 @@ namespace Library.Test
         public void TestGetTotalDefenseValue()
         {
             SpellsBook book = new SpellsBook();
-            WindSpell spell2 = new WindSpell();
+            ISpell spell2 = new WindSpell();
             book.AddSpell(spell2);
 
             Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff(); 
+            IMixedItems staff = new RunicStaff(); 
             gandalf.EquipMixedItem(staff); 
             gandalf.EquipSpellBook(book);
             
@@ -50,25 +50,25 @@ namespace Library.Test
             
             Assert.AreEqual(0,gandalf.GetTotalDefenseValue());
         }
-        
 
         [Test]
         public void TestReceiveAttack()
         {
             SpellsBook book = new SpellsBook();
-            WindSpell spell2 = new WindSpell();
+            ISpell spell2 = new WindSpell();
             book.AddSpell(spell2);
 
             Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff(); 
+            IMixedItems staff = new RunicStaff(); 
             gandalf.EquipMixedItem(staff); 
             gandalf.EquipSpellBook(book);
 
             Knight knight = new Knight("Knight");
-            Sword sword = new Sword();
-            Armor armor = new Armor();
-            Helmet helmet = new Helmet();
-            Shield shield = new Shield();
+            IAttackItems sword = new Sword();
+            IDefensiveItems armor = new Armor();
+            IDefensiveItems helmet = new Helmet();
+            IDefensiveItems shield = new Shield();
+
             knight.EquipAttackItem(sword);
             knight.EquipDefensiveItem(armor);
             knight.EquipDefensiveItem(helmet);
@@ -77,11 +77,28 @@ namespace Library.Test
             Assert.AreEqual(100,gandalf.ReceiveAttack(knight.GetTotalAttackValue()));
             Assert.AreEqual(0,knight.ReceiveAttack(gandalf.GetTotalAttackValue()));
         }
+
+        [Test]
+        public void ReceiveAttackNegativo()
+        {
+            Archer archer = new Archer("Archer");
+
+            Assert.AreEqual(100,archer.ReceiveAttack(-55841));
+        }
+
+        [Test]
+        public void ReceiveAttackGrande()
+        {
+            Archer archer = new Archer("Archer");
+
+            Assert.AreEqual(0,archer.ReceiveAttack(656615156));  
+        }
+
         [Test]
         public void TestCure()
         {
             Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff(); 
+            IMixedItems staff = new RunicStaff(); 
             gandalf.EquipMixedItem(staff);
 
             Knight knight = new Knight("Knight");
@@ -90,84 +107,98 @@ namespace Library.Test
 
             Assert.AreEqual(100,knight.Cure());
         }
+
         [Test]
-        public void TestknightEquipAttackAndUnEquipAttackItem()
+        public void TestEquipAttackItemAndUnEquip()
         {
             Knight knight = new Knight("Knight");
-            Axe axe = new Axe();
-            Bow bow = new Bow();
-            knight.EquipAttackItem(axe);
-            knight.EquipAttackItem(bow);
-
-            Assert.AreEqual(25+15,knight.GetTotalAttackValue());
-
-            knight.UnEquipAttackItem(axe);
-            knight.UnEquipAttackItem(bow);
-
-            Assert.AreEqual(0,knight.GetTotalAttackValue());
-        }
-        public void TestWizzardEquipAttackAndUnEquipAttackItem()
-        {
-            Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff();
-            Bow bow = new Bow();
-            gandalf.EquipMixedItem(staff);
-            gandalf.EquipAttackItem(bow);
-
-            Assert.AreEqual(100+15,gandalf.GetTotalAttackValue());
-
-            gandalf.UnEquipMixedItem(staff);
-            gandalf.UnEquipAttackItem(bow);
-
-            Assert.AreEqual(0,gandalf.GetTotalAttackValue());
-        }
-        [Test]
-        public void TestArcherEquipAttackAndUnEquipAttackItem()
-        {
             Archer archer = new Archer("Archer");
-            Axe axe = new Axe();
-            Bow bow = new Bow();
-            archer.EquipAttackItem(axe);
+            
+            IAttackItems axe = new Axe();
+            IAttackItems sword = new Sword();
+            IAttackItems bow = new Bow();
+
+            knight.EquipAttackItem(axe);
+            knight.EquipAttackItem(sword);
+
             archer.EquipAttackItem(bow);
 
-            Assert.AreEqual(25+15,archer.GetTotalAttackValue());
+            Assert.AreEqual(25+20,knight.GetTotalAttackValue());
+            Assert.AreEqual(15,archer.GetTotalAttackValue());
 
-            archer.UnEquipAttackItem(axe);
+            knight.UnEquipAttackItem(axe);
+            knight.UnEquipAttackItem(sword);
+
             archer.UnEquipAttackItem(bow);
 
+            Assert.AreEqual(0,knight.GetTotalAttackValue());
             Assert.AreEqual(0,archer.GetTotalAttackValue());
         }
-        [Test]
-        public void TestDwarfEquipAttackAndUnEquipAttackItem()
-        {
-            Dwarf dwarf = new Dwarf("Dwarf");
-            Axe axe = new Axe();
-            Bow bow = new Bow();
-            dwarf.EquipAttackItem(axe);
-            dwarf.EquipAttackItem(bow);
 
-            Assert.AreEqual(25+15,dwarf.GetTotalAttackValue());
-
-            dwarf.UnEquipAttackItem(axe);
-            dwarf.UnEquipAttackItem(bow);
-
-            Assert.AreEqual(0,dwarf.GetTotalAttackValue());
-        }
         [Test]
         public void TestEquipDefensiveItemAndUnEquip()
         {
             Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff();
-            Shield shield = new Shield();
-            gandalf.EquipMixedItem(staff);
+            Dwarf dwarf = new Dwarf("Dwarf");
+
+            IDefensiveItems armor = new Armor();
+            IDefensiveItems shield = new Shield();
+
             gandalf.EquipDefensiveItem(shield);
+            gandalf.EquipDefensiveItem(armor);
 
-            Assert.AreEqual(100+14,gandalf.GetTotalDefenseValue());
+            dwarf.EquipDefensiveItem(armor);
 
-            gandalf.UnEquipMixedItem(staff);
+            Assert.AreEqual(25+14,gandalf.GetTotalDefenseValue());
+            Assert.AreEqual(25,dwarf.GetTotalDefenseValue());
+
+            gandalf.UnEquipDefensiveItem(armor);
             gandalf.UnEquipDefensiveItem(shield);
 
+            dwarf.UnEquipDefensiveItem(armor);
+
             Assert.AreEqual(0,gandalf.GetTotalDefenseValue());
+            Assert.AreEqual(0,dwarf.GetTotalDefenseValue());
+        }
+
+        [Test]
+        public void TestEquipMixedItemAndUnequip()
+        {
+            Wizard gandalf = new Wizard("Gandalf");
+            
+            IMixedItems staff1 = new RunicStaff();
+            IMixedItems staff2 = new WoodStaff();
+
+            gandalf.EquipMixedItem(staff1);
+
+            Assert.AreEqual(100,gandalf.GetTotalAttackValue());
+            Assert.AreEqual(100,gandalf.GetTotalDefenseValue());
+
+            gandalf.UnEquipMixedItem(staff1);
+            gandalf.EquipMixedItem(staff2);
+
+            Assert.AreEqual(50,gandalf.GetTotalAttackValue());
+            Assert.AreEqual(50,gandalf.GetTotalDefenseValue());
+        }
+
+        [Test]
+        public void TestSpellsBookAttackAndDefenseValue()
+        {
+            ISpell spell1 = new WindSpell();
+            ISpell spell2 = new FireSpell();
+
+            SpellsBook book = new SpellsBook();
+
+            book.AddSpell(spell1);
+            
+            Assert.AreEqual(80,book.AttackValue);
+            Assert.AreEqual(60,book.DefenseValue);
+
+            book.RemoveSpell(spell1);
+            book.AddSpell(spell2);
+
+            Assert.AreEqual(70,book.AttackValue);
+            Assert.AreEqual(70,book.DefenseValue);
         }
     }
 }
