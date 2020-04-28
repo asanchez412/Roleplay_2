@@ -65,17 +65,10 @@ namespace Library.Test
 
             Knight knight = new Knight("Knight");
             IAttackItems sword = new Sword();
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
 
             knight.EquipAttackItem(sword);
-            knight.EquipDefensiveItem(armor);
-            knight.EquipDefensiveItem(helmet);
-            knight.EquipDefensiveItem(shield);
 
             Assert.AreEqual(100,gandalf.ReceiveAttack(knight.GetTotalAttackValue()));
-            Assert.AreEqual(0,knight.ReceiveAttack(gandalf.GetTotalAttackValue()));
         }
 
         [Test]
@@ -108,8 +101,6 @@ namespace Library.Test
         public void TestEquipAttackItemAndUnEquip()
         {
             Wizard gandalf = new Wizard("Gandalf");
-
-            Archer archer = new Archer("Archer");
             
             IAttackItems axe = new Axe();
             IAttackItems sword = new Sword();
