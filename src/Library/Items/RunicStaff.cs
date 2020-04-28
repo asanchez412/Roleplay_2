@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public class Staff : IMixedItems
+    public class RunicStaff : IMixedItems
     {
         public int AttackValue()
         {

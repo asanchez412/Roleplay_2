@@ -14,7 +14,7 @@ namespace Program
             book.AddSpell(spell2);
 
             Wizard gandalf = new Wizard("Gandalf");
-            Staff staff = new Staff(); 
+            RunicStaff staff = new RunicStaff(); 
             gandalf.EquipMixedItem(staff); 
             gandalf.EquipSpellBook(book);
 
