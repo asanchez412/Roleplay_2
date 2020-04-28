@@ -36,6 +36,8 @@ namespace Program
 
             // Gandalf ataca a Gimli
 
+            Console.WriteLine("Gandalf atacará a Gimli");
+
             Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
             Console.WriteLine($"{gandalf.Name} attacks {gimli.Name} with ⚔️ {gandalf.GetTotalAttackValue()}");
 
@@ -48,6 +50,8 @@ namespace Program
             Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
 
             // Knight ataca a Gimli
+
+            Console.WriteLine("Knight atacará a Gimli");
 
             Console.WriteLine($"{gimli.Name} has ❤️ {gimli.Health}");
             Console.WriteLine($"{knight.Name} attacks {gimli.Name} with ⚔️ {knight.GetTotalAttackValue()}");

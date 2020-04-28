@@ -18,6 +18,8 @@ namespace Library.Test
             archer.EquipAttackItem(bow);
             archer.EquipAttackItem(sword);
 
+            // Se establece si el cálculo del valor de ataque total es correcto
+
             Assert.AreEqual(25+15+20, archer.GetTotalAttackValue());
         }
 
@@ -26,6 +28,8 @@ namespace Library.Test
         {
             Archer archer = new Archer("Archer");
             
+            // Se establece que el valor de ataque es 0 en ausencia de items
+
             Assert.AreEqual(0,archer.GetTotalAttackValue());
         }
 
@@ -42,6 +46,8 @@ namespace Library.Test
             archer.EquipDefensiveItem(helmet);
             archer.EquipDefensiveItem(shield);
             
+            // Se establece si el cálculo del valor de armadura total es correcto
+
             Assert.AreEqual(25+18+14,archer.GetTotalDefenseValue());
         }
 
@@ -50,6 +56,8 @@ namespace Library.Test
         {
             Archer archer = new Archer("Archer");
             
+            // Se establece que el valor de ataque es 0 en ausencia de items
+
             Assert.AreEqual(0,archer.GetTotalDefenseValue());
         }
 
@@ -65,13 +73,17 @@ namespace Library.Test
             archer.EquipDefensiveItem(helmet);
             archer.EquipDefensiveItem(shield);
 
-            Assert.AreEqual((100+25+18+14)-(130),archer.ReceiveAttack(130));
+            // Se establece el daño recibido. Devuelve la vida restante.
+
+            Assert.AreEqual(27,archer.ReceiveAttack(130));
         }
 
         [Test]
         public void ReceiveAttackNegativo()
         {
             Archer archer = new Archer("Archer");
+
+            // Se establece el daño recibido. Devuelve la vida restante.
 
             Assert.AreEqual(100,archer.ReceiveAttack(-55841));
         }
@@ -80,6 +92,8 @@ namespace Library.Test
         public void ReceiveAttackGrande()
         {
             Archer archer = new Archer("Archer");
+
+            // Se establece el daño recibido. Devuelve la vida restante.
 
             Assert.AreEqual(0,archer.ReceiveAttack(656615156));  
         }
@@ -90,6 +104,8 @@ namespace Library.Test
             Archer archer = new Archer("Archer");
 
             archer.ReceiveAttack(120);
+
+            // Se establece si el personaje se curó completamente
 
             Assert.AreEqual(100,archer.Cure());
         }

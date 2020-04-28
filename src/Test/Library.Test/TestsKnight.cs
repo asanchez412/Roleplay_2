@@ -18,6 +18,8 @@ namespace Library.Test
             knight.EquipAttackItem(bow);
             knight.EquipAttackItem(sword);
 
+            // Se establece si el cálculo del valor de ataque total es correcto
+
             Assert.AreEqual(25+15+20, knight.GetTotalAttackValue());
         }
 
@@ -26,6 +28,8 @@ namespace Library.Test
         {
             Knight knight = new Knight("Knight");
             
+            // Se establece que el valor de ataque es 0 en ausencia de items
+
             Assert.AreEqual(0,knight.GetTotalAttackValue());
         }
 
@@ -42,6 +46,8 @@ namespace Library.Test
             knight.EquipDefensiveItem(helmet);
             knight.EquipDefensiveItem(shield);
             
+            // Se establece si el cálculo del valor de armadura total es correcto
+
             Assert.AreEqual(25+18+14,knight.GetTotalDefenseValue());
         }
 
@@ -50,6 +56,8 @@ namespace Library.Test
         {
             Knight knight = new Knight("Knight");
             
+            // Se establece que el valor de ataque es 0 en ausencia de items
+
             Assert.AreEqual(0,knight.GetTotalDefenseValue());
         }
 
@@ -65,13 +73,17 @@ namespace Library.Test
             knight.EquipDefensiveItem(helmet);
             knight.EquipDefensiveItem(shield);
 
-            Assert.AreEqual((100+25+18+14)-(130),knight.ReceiveAttack(130));
+            // Se establece el daño recibido. Devuelve la vida restante.
+
+            Assert.AreEqual(27 ,knight.ReceiveAttack(130));
         }
 
         [Test]
         public void ReceiveAttackNegativo()
         {
             Knight knight = new Knight("Knight");
+
+            // Se establece el daño recibido. Devuelve la vida restante.
 
             Assert.AreEqual(100,knight.ReceiveAttack(-55841));
         }
@@ -80,6 +92,8 @@ namespace Library.Test
         public void ReceiveAttackGrande()
         {
             Knight knight = new Knight("Knight");
+
+            // Se establece el daño recibido. Devuelve la vida restante.
 
             Assert.AreEqual(0,knight.ReceiveAttack(656615156));  
         }
@@ -90,7 +104,9 @@ namespace Library.Test
             Knight knight = new Knight("Knight");
 
             knight.ReceiveAttack(120);
-
+            
+            // Se establece si el personaje se curó completamente
+            
             Assert.AreEqual(100,knight.Cure());
         }
 

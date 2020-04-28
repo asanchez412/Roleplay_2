@@ -17,6 +17,8 @@ namespace Library.Test
             gandalf.EquipMixedItem(staff); 
             gandalf.EquipSpellBook(book);
             
+            // Se establece si el cálculo del valor de ataque total es correcto
+
             Assert.AreEqual(170,gandalf.GetTotalAttackValue());
         }
 
@@ -25,6 +27,8 @@ namespace Library.Test
         {
             Wizard gandalf = new Wizard("Gandalf");
             
+            // Se establece que el valor de ataque es 0 en ausencia de items
+
             Assert.AreEqual(0,gandalf.GetTotalAttackValue());
         }
 
@@ -40,6 +44,8 @@ namespace Library.Test
             gandalf.EquipMixedItem(staff); 
             gandalf.EquipSpellBook(book);
             
+            // Se establece si el cálculo del valor de armadura total es correcto
+
             Assert.AreEqual(160,gandalf.GetTotalDefenseValue());
         }
 
@@ -48,33 +54,33 @@ namespace Library.Test
         {
             Wizard gandalf = new Wizard("Gandalf");
             
+            // Se establece que el valor de ataque es 0 en ausencia de items
+
             Assert.AreEqual(0,gandalf.GetTotalDefenseValue());
         }
 
         [Test]
         public void TestReceiveAttack()
         {
-            SpellsBook book = new SpellsBook();
-            ISpell spell2 = new WindSpell();
-            book.AddSpell(spell2);
 
             Wizard gandalf = new Wizard("Gandalf");
-            IMixedItems staff = new RunicStaff(); 
-            gandalf.EquipMixedItem(staff); 
-            gandalf.EquipSpellBook(book);
 
             Knight knight = new Knight("Knight");
             IAttackItems sword = new Sword();
 
             knight.EquipAttackItem(sword);
 
-            Assert.AreEqual(100,gandalf.ReceiveAttack(knight.GetTotalAttackValue()));
+            // Se establece el daño recibido. Devuelve la vida restante.
+
+            Assert.AreEqual(80,gandalf.ReceiveAttack(knight.GetTotalAttackValue()));
         }
 
         [Test]
         public void ReceiveAttackNegativo()
         {
             Wizard gandalf = new Wizard("Gandalf");
+            
+            // Se establece el daño recibido. Devuelve la vida restante.
 
             Assert.AreEqual(100,gandalf.ReceiveAttack(-55841));
         }
@@ -83,6 +89,8 @@ namespace Library.Test
         public void ReceiveAttackGrande()
         {
             Wizard gandalf = new Wizard("Gandalf");
+
+            // Se establece el daño recibido. Devuelve la vida restante.
 
             Assert.AreEqual(0,gandalf.ReceiveAttack(656615156));  
         }
@@ -93,6 +101,8 @@ namespace Library.Test
             Wizard gandalf = new Wizard("Gandalf");
 
             gandalf.ReceiveAttack(gandalf.ReceiveAttack(120));
+
+            // Se establece si el personaje se curó completamente
 
             Assert.AreEqual(100,gandalf.Cure());
         }
@@ -168,7 +178,10 @@ namespace Library.Test
             SpellsBook book = new SpellsBook();
 
             book.AddSpell(spell1);
-            
+
+            // Se verifica cálculo correcto en base a 
+            // agregar hechizos
+
             Assert.AreEqual(80,book.AttackValue);
             Assert.AreEqual(60,book.DefenseValue);
 
