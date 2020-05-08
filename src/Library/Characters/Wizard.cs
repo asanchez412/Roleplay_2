@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public class Wizard : Character
+    public class Wizard : Heroes
     {
         public Wizard(string name) : base(name) { }
 
