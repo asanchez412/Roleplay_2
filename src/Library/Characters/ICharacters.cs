@@ -12,6 +12,11 @@
 
 public interface ICharacter
 {
+
+    int Health { get; set; }
+
+    string Name { get; set; }
+
     void EquipDefensiveItem(IDefensiveItems defensiveItem);
 
     void UnEquipDefensiveItem(IDefensiveItems defensiveItem);
@@ -19,6 +24,10 @@ public interface ICharacter
     void EquipAttackItem(IAttackItems attackItem);
 
     void UnEquipAttackItem(IAttackItems attackItem);
+
+    void EquipMixedItem(IMixedItems mixedItem);
+
+    void UnEquipMixedItem(IMixedItems mixedItem);
 
     int GetTotalAttackValue();
 
