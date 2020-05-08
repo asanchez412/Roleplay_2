@@ -10,13 +10,13 @@ namespace Library.Test
         {
             Archer archer = new Archer("Archer");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            archer.EquipAttackItem(axe);
-            archer.EquipAttackItem(bow);
-            archer.EquipAttackItem(sword);
+            archer.EquipItem(axe);
+            archer.EquipItem(bow);
+            archer.EquipItem(sword);
 
             // Se establece si el cálculo del valor de ataque total es correcto
 
@@ -38,13 +38,13 @@ namespace Library.Test
         {
             Archer archer = new Archer("Archer");
 
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
+            Items armor = new Armor();
+            Items helmet = new Helmet();
+            Items shield = new Shield();
 
-            archer.EquipDefensiveItem(armor);
-            archer.EquipDefensiveItem(helmet);
-            archer.EquipDefensiveItem(shield);
+            archer.EquipItem(armor);
+            archer.EquipItem(helmet);
+            archer.EquipItem(shield);
             
             // Se establece si el cálculo del valor de armadura total es correcto
 
@@ -65,13 +65,13 @@ namespace Library.Test
         public void TestReceiveAttack()
         {
             Archer archer = new Archer("Archer");
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
+            Items armor = new Armor();
+            Items helmet = new Helmet();
+            Items shield = new Shield();
 
-            archer.EquipDefensiveItem(armor);
-            archer.EquipDefensiveItem(helmet);
-            archer.EquipDefensiveItem(shield);
+            archer.EquipItem(armor);
+            archer.EquipItem(helmet);
+            archer.EquipItem(shield);
 
             // Se establece el daño recibido. Devuelve la vida restante.
 
@@ -105,48 +105,31 @@ namespace Library.Test
 
             archer.ReceiveAttack(120);
 
+            archer.Cure();
+
             // Se establece si el personaje se curó completamente
 
-            Assert.AreEqual(100,archer.Cure());
+            Assert.AreEqual(archer.Health,archer.Cure());
         }
 
         [Test]
-        public void TestEquipAttackItemAndUnEquip()
+        public void TestEquiItemAndUnEquip()
         {
             Archer archer = new Archer("Archer");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            archer.EquipAttackItem(axe);
-            archer.EquipAttackItem(bow);
-            archer.EquipAttackItem(sword);
+            archer.EquipItem(axe);
+            archer.EquipItem(bow);
+            archer.EquipItem(sword);
 
             Assert.AreEqual(25+15+20, archer.GetTotalAttackValue());
 
-            archer.UnEquipAttackItem(axe);
-            archer.UnEquipAttackItem(bow);
+            archer.UnEquipItem(axe);
+            archer.UnEquipItem(bow);
             Assert.AreEqual(20, archer.GetTotalAttackValue());
-        }
-
-        [Test]
-        public void TestEquipDefensiveItemAndUnEquip()
-        {
-            Archer archer = new Archer("Archer");
-
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems shield = new Shield();
-
-            archer.EquipDefensiveItem(shield);
-            archer.EquipDefensiveItem(armor);
-
-            Assert.AreEqual(25+14,archer.GetTotalDefenseValue());
-
-            archer.UnEquipDefensiveItem(armor);
-            archer.UnEquipDefensiveItem(shield);
-
-            Assert.AreEqual(0,archer.GetTotalDefenseValue());
         }
     }
 }

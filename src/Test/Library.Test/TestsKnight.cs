@@ -10,13 +10,13 @@ namespace Library.Test
         {
             Knight knight = new Knight("Knight");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            knight.EquipAttackItem(axe);
-            knight.EquipAttackItem(bow);
-            knight.EquipAttackItem(sword);
+            knight.EquipItem(axe);
+            knight.EquipItem(bow);
+            knight.EquipItem(sword);
 
             // Se establece si el cálculo del valor de ataque total es correcto
 
@@ -38,13 +38,13 @@ namespace Library.Test
         {
             Knight knight = new Knight("Knight");
 
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
+            Items armor = new Armor();
+            Items helmet = new Helmet();
+            Items shield = new Shield();
 
-            knight.EquipDefensiveItem(armor);
-            knight.EquipDefensiveItem(helmet);
-            knight.EquipDefensiveItem(shield);
+            knight.EquipItem(armor);
+            knight.EquipItem(helmet);
+            knight.EquipItem(shield);
             
             // Se establece si el cálculo del valor de armadura total es correcto
 
@@ -65,13 +65,13 @@ namespace Library.Test
         public void TestReceiveAttack()
         {
             Knight knight = new Knight("Knight");
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
+            Items armor = new Armor();
+            Items helmet = new Helmet();
+            Items shield = new Shield();
 
-            knight.EquipDefensiveItem(armor);
-            knight.EquipDefensiveItem(helmet);
-            knight.EquipDefensiveItem(shield);
+            knight.EquipItem(armor);
+            knight.EquipItem(helmet);
+            knight.EquipItem(shield);
 
             // Se establece el daño recibido. Devuelve la vida restante.
 
@@ -104,49 +104,32 @@ namespace Library.Test
             Knight knight = new Knight("Knight");
 
             knight.ReceiveAttack(120);
+
+            knight.Cure();
             
             // Se establece si el personaje se curó completamente
             
-            Assert.AreEqual(100,knight.Cure());
+            Assert.AreEqual(knight.Health,knight.Cure());
         }
 
         [Test]
-        public void TestEquipAttackItemAndUnEquip()
+        public void TestEquipItemAndUnEquip()
         {
             Knight knight = new Knight("Knight");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            knight.EquipAttackItem(axe);
-            knight.EquipAttackItem(bow);
-            knight.EquipAttackItem(sword);
+            knight.EquipItem(axe);
+            knight.EquipItem(bow);
+            knight.EquipItem(sword);
 
             Assert.AreEqual(25+15+20, knight.GetTotalAttackValue());
 
-            knight.UnEquipAttackItem(axe);
-            knight.UnEquipAttackItem(bow);
+            knight.UnEquipItem(axe);
+            knight.UnEquipItem(bow);
             Assert.AreEqual(20, knight.GetTotalAttackValue());
-        }
-
-        [Test]
-        public void TestEquipDefensiveItemAndUnEquip()
-        {
-            Knight knight = new Knight("Knight");
-
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems shield = new Shield();
-
-            knight.EquipDefensiveItem(shield);
-            knight.EquipDefensiveItem(armor);
-
-            Assert.AreEqual(25+14,knight.GetTotalDefenseValue());
-
-            knight.UnEquipDefensiveItem(armor);
-            knight.UnEquipDefensiveItem(shield);
-
-            Assert.AreEqual(0,knight.GetTotalDefenseValue());
         }
     }
 }

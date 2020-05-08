@@ -1,13 +1,13 @@
 namespace RoleplayGame
 {
-    public class RunicStaff : IMixedItems
+    public class RunicStaff : Items
     {
-        public int AttackValue()
+        public override int AttackValue()
         {
             return 100;
         }
 
-        public int DefenseValue()
+        public override int DefenseValue()
         {
             return 100;
         }

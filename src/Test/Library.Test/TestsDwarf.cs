@@ -10,13 +10,13 @@ namespace Library.Test
         {
             Dwarf dwarf = new Dwarf("Dwarf");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            dwarf.EquipAttackItem(axe);
-            dwarf.EquipAttackItem(bow);
-            dwarf.EquipAttackItem(sword);
+            dwarf.EquipItem(axe);
+            dwarf.EquipItem(bow);
+            dwarf.EquipItem(sword);
 
             // Se establece si el cálculo del valor de ataque total es correcto
 
@@ -38,13 +38,13 @@ namespace Library.Test
         {
             Dwarf dwarf = new Dwarf("Dwarf");
 
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
+            Items armor = new Armor();
+            Items helmet = new Helmet();
+            Items shield = new Shield();
 
-            dwarf.EquipDefensiveItem(armor);
-            dwarf.EquipDefensiveItem(helmet);
-            dwarf.EquipDefensiveItem(shield);
+            dwarf.EquipItem(armor);
+            dwarf.EquipItem(helmet);
+            dwarf.EquipItem(shield);
             
             // Se establece si el cálculo del valor de armadura total es correcto
 
@@ -65,13 +65,13 @@ namespace Library.Test
         public void TestReceiveAttack()
         {
             Dwarf dwarf = new Dwarf("Dwarf");
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems helmet = new Helmet();
-            IDefensiveItems shield = new Shield();
+            Items armor = new Armor();
+            Items helmet = new Helmet();
+            Items shield = new Shield();
 
-            dwarf.EquipDefensiveItem(armor);
-            dwarf.EquipDefensiveItem(helmet);
-            dwarf.EquipDefensiveItem(shield);
+            dwarf.EquipItem(armor);
+            dwarf.EquipItem(helmet);
+            dwarf.EquipItem(shield);
 
             // Se establece el daño recibido. Devuelve la vida restante.
 
@@ -105,48 +105,31 @@ namespace Library.Test
 
             dwarf.ReceiveAttack(120);
 
+            dwarf.Cure();
+
             // Se establece si el personaje se curó completamente
             
-            Assert.AreEqual(100,dwarf.Cure());
+            Assert.AreEqual(dwarf.Health,dwarf.Cure());
         }
 
         [Test]
-        public void TestEquipAttackItemAndUnEquip()
+        public void TestEquipItemAndUnEquip()
         {
             Dwarf dwarf = new Dwarf("Dwarf");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            dwarf.EquipAttackItem(axe);
-            dwarf.EquipAttackItem(bow);
-            dwarf.EquipAttackItem(sword);
+            dwarf.EquipItem(axe);
+            dwarf.EquipItem(bow);
+            dwarf.EquipItem(sword);
 
             Assert.AreEqual(25+15+20, dwarf.GetTotalAttackValue());
 
-            dwarf.UnEquipAttackItem(axe);
-            dwarf.UnEquipAttackItem(bow);
+            dwarf.UnEquipItem(axe);
+            dwarf.UnEquipItem(bow);
             Assert.AreEqual(20, dwarf.GetTotalAttackValue());
-        }
-
-        [Test]
-        public void TestEquipDefensiveItemAndUnEquip()
-        {
-            Dwarf dwarf = new Dwarf("Dwarf");
-
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems shield = new Shield();
-
-            dwarf.EquipDefensiveItem(shield);
-            dwarf.EquipDefensiveItem(armor);
-
-            Assert.AreEqual(25+14,dwarf.GetTotalDefenseValue());
-
-            dwarf.UnEquipDefensiveItem(armor);
-            dwarf.UnEquipDefensiveItem(shield);
-
-            Assert.AreEqual(0,dwarf.GetTotalDefenseValue());
         }
     }
 }

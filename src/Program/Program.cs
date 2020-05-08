@@ -15,7 +15,7 @@ namespace Program
 
             Wizard gandalf = new Wizard("Gandalf");
             RunicStaff staff = new RunicStaff(); 
-            gandalf.EquipMixedItem(staff); 
+            gandalf.EquipItem(staff); 
             gandalf.EquipSpellBook(book);
 
             Knight knight = new Knight("Knight");
@@ -23,16 +23,16 @@ namespace Program
             Armor armor = new Armor();
             Helmet helmet = new Helmet();
             Shield shield = new Shield();
-            knight.EquipAttackItem(sword);
-            knight.EquipDefensiveItem(armor);
-            knight.EquipDefensiveItem(helmet);
-            knight.EquipDefensiveItem(shield);
+            knight.EquipItem(sword);
+            knight.EquipItem(armor);
+            knight.EquipItem(helmet);
+            knight.EquipItem(shield);
 
             Dwarf gimli = new Dwarf("Gimli");
             Axe axe = new Axe();
             Helmet helmet1 = new Helmet();
-            gimli.EquipAttackItem(axe);
-            gimli.EquipDefensiveItem(helmet1);
+            gimli.EquipItem(axe);
+            gimli.EquipItem(helmet1);
 
             // Gandalf ataca a Gimli
 

@@ -13,8 +13,8 @@ namespace Library.Test
             book.AddSpell(spell1);
 
             Wizard gandalf = new Wizard("Gandalf");
-            IMixedItems staff = new RunicStaff(); 
-            gandalf.EquipMixedItem(staff); 
+            Items staff = new RunicStaff(); 
+            gandalf.EquipItem(staff); 
             gandalf.EquipSpellBook(book);
             
             // Se establece si el cálculo del valor de ataque total es correcto
@@ -40,8 +40,8 @@ namespace Library.Test
             book.AddSpell(spell2);
 
             Wizard gandalf = new Wizard("Gandalf");
-            IMixedItems staff = new RunicStaff(); 
-            gandalf.EquipMixedItem(staff); 
+            Items staff = new RunicStaff(); 
+            gandalf.EquipItem(staff); 
             gandalf.EquipSpellBook(book);
             
             // Se establece si el cálculo del valor de armadura total es correcto
@@ -66,9 +66,9 @@ namespace Library.Test
             Wizard gandalf = new Wizard("Gandalf");
 
             Knight knight = new Knight("Knight");
-            IAttackItems sword = new Sword();
+            Items sword = new Sword();
 
-            knight.EquipAttackItem(sword);
+            knight.EquipItem(sword);
 
             // Se establece el daño recibido. Devuelve la vida restante.
 
@@ -102,71 +102,33 @@ namespace Library.Test
 
             gandalf.ReceiveAttack(gandalf.ReceiveAttack(120));
 
+            gandalf.Cure();
+
             // Se establece si el personaje se curó completamente
 
-            Assert.AreEqual(100,gandalf.Cure());
+            Assert.AreEqual(gandalf.Health,gandalf.Cure());
         }
 
         [Test]
-        public void TestEquipAttackItemAndUnEquip()
+        public void TestEquipItemAndUnEquip()
         {
             Wizard gandalf = new Wizard("Gandalf");
             
-            IAttackItems axe = new Axe();
-            IAttackItems sword = new Sword();
-            IAttackItems bow = new Bow();
+            Items axe = new Axe();
+            Items sword = new Sword();
+            Items bow = new Bow();
 
-            gandalf.EquipAttackItem(axe);
-            gandalf.EquipAttackItem(bow);
-            gandalf.EquipAttackItem(sword);
+            gandalf.EquipItem(axe);
+            gandalf.EquipItem(bow);
+            gandalf.EquipItem(sword);
 
 
             Assert.AreEqual(25+15+20,gandalf.GetTotalAttackValue());
 
-            gandalf.UnEquipAttackItem(axe);
-            gandalf.UnEquipAttackItem(bow);
+            gandalf.UnEquipItem(axe);
+            gandalf.UnEquipItem(bow);
 
             Assert.AreEqual(20,gandalf.GetTotalAttackValue());
-        }
-
-        [Test]
-        public void TestEquipDefensiveItemAndUnEquip()
-        {
-            Wizard gandalf = new Wizard("Gandalf");
-
-            IDefensiveItems armor = new Armor();
-            IDefensiveItems shield = new Shield();
-
-            gandalf.EquipDefensiveItem(shield);
-            gandalf.EquipDefensiveItem(armor);
-
-
-            Assert.AreEqual(25+14,gandalf.GetTotalDefenseValue());
-
-            gandalf.UnEquipDefensiveItem(armor);
-            gandalf.UnEquipDefensiveItem(shield);
-
-            Assert.AreEqual(0,gandalf.GetTotalDefenseValue());
-        }
-
-        [Test]
-        public void TestEquipMixedItemAndUnequip()
-        {
-            Wizard gandalf = new Wizard("Gandalf");
-            
-            IMixedItems staff1 = new RunicStaff();
-            IMixedItems staff2 = new WoodStaff();
-
-            gandalf.EquipMixedItem(staff1);
-
-            Assert.AreEqual(100,gandalf.GetTotalAttackValue());
-            Assert.AreEqual(100,gandalf.GetTotalDefenseValue());
-
-            gandalf.UnEquipMixedItem(staff1);
-            gandalf.EquipMixedItem(staff2);
-
-            Assert.AreEqual(50,gandalf.GetTotalAttackValue());
-            Assert.AreEqual(50,gandalf.GetTotalDefenseValue());
         }
 
         [Test]
