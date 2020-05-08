@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -92,6 +93,64 @@ namespace RoleplayGame
                     hero.Cure();
                 }
             }
+        }
+
+        public bool NoHeroesAlive()
+        {
+            int cantidad = 0;
+            foreach (Heroes hero in heroes)
+            {
+                if (hero.Health == 0)
+                {
+                    cantidad += 1;
+                }
+            }
+            if (cantidad == heroes.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool NoEnemiesAlive()
+        {
+            int cantidad = 0;
+            foreach (Enemies enemy in enemies)
+            {
+                if (enemy.Health == 0)
+                {
+                    cantidad += 1;
+                }
+            }
+            if (cantidad == heroes.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual string DoEncounter()
+        {
+            while (NoEnemiesAlive() == false && NoHeroesAlive() == false)
+            {
+                this.EnemiesAttack();
+                this.HeroesAttack();
+            }
+            if (NoEnemiesAlive() == true)
+            {
+                return "El encuentro ha terminado. Han ganado los enemigos.";
+            }
+            else
+            {
+                return "El encuentro ha terminado. Han ganado los héroes";
+            }
+            
         }
     }
 }

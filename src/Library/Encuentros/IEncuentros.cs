@@ -16,4 +16,6 @@ public interface IEncuentros
     void HeroesAttack();
 
     void CureHeroVP();
+
+    string DoEncounter();
 }
