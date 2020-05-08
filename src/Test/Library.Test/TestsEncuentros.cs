@@ -8,7 +8,7 @@ namespace Library.Test
     {
 
         [Test]
-        public void TestEncuentroCompleto()
+        public void TestDoEncounter()
         {
             Renegade renegade = new Renegade("Renegade");
             Ogre ogre = new Ogre("Ogre");

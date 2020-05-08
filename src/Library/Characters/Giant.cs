@@ -8,7 +8,7 @@ namespace RoleplayGame
 
         public override int VictoryPoints()
         {
-            return 2;
+            return 3;
         }
     }
 }
