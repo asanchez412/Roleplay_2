@@ -18,11 +18,15 @@ namespace Library.Test
 
             Helmet helmet = new Helmet();
             Sword sword = new Sword();
+            Axe axe = new Axe();
+            WoodStaff staff = new WoodStaff();
 
             gimli.EquipItem(helmet);
             gimli.EquipItem(sword);
+            gimli.EquipItem(axe);
+            gimli.EquipItem(staff);
 
-            Encuentro encuentro = new Encuentro();
+            EncuentroNormal encuentro = new EncuentroNormal();
 
             encuentro.AddHero(gimli);
 
@@ -30,7 +34,7 @@ namespace Library.Test
             encuentro.AddEnemy(ogre);
             encuentro.AddEnemy(giant);
 
-            Assert.AreEqual(0, 0);
+            Assert.AreEqual("El encuentro ha terminado. Han ganado los héroes", encuentro.DoEncounter());
         }
 
         [Test]
@@ -56,7 +60,7 @@ namespace Library.Test
             encuentro.AddEnemy(ogre);
             encuentro.AddEnemy(giant);
 
-            Assert.AreEqual(0, 0);
+            Assert.AreEqual(gimli.Health, 100 - gimli.ReceiveAttack(renegade.GetTotalAttackValue()) - gimli.ReceiveAttack(ogre.GetTotalAttackValue()) - gimli.ReceiveAttack(giant.GetTotalAttackValue()));
         }
 
         public void TestEnemiesAttackLessHeroes()
