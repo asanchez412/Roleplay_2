@@ -26,48 +26,24 @@ namespace RoleplayGame
             }
         }
 
-        protected IList<IDefensiveItems> defensiveEquipment = new List<IDefensiveItems>();
+        protected IList<Items> items = new List<Items>();
 
-        protected IList<IAttackItems> offensiveEquipment = new List<IAttackItems>();
-
-        protected IList<IMixedItems> mixedEquipment = new List<IMixedItems>();
-
-        public void EquipDefensiveItem(IDefensiveItems defensiveItem)
+        public void EquipItem(Items item)
         {
-            this.defensiveEquipment.Add(defensiveItem);
+            this.items.Add(item);
         }
 
-        public void UnEquipDefensiveItem(IDefensiveItems defensiveItem)
+        public void UnEquipItem(Items item)
         {
-            this.defensiveEquipment.Remove(defensiveItem);
-        }
-
-        public void EquipAttackItem(IAttackItems attackItem)
-        {
-            this.offensiveEquipment.Add(attackItem);
-        }
-
-        public void UnEquipAttackItem(IAttackItems attackItem)
-        {
-            this.offensiveEquipment.Remove(attackItem);
-        }
-
-        public void EquipMixedItem(IMixedItems mixedItem)
-        {
-            this.mixedEquipment.Add(mixedItem);
-        }
-
-        public void UnEquipMixedItem(IMixedItems mixedItem)
-        {
-            this.mixedEquipment.Remove(mixedItem);
+            this.items.Remove(item);
         }
 
         public virtual int GetTotalAttackValue()
         {   
             int result = 0;
-            foreach (IAttackItems attackItem in offensiveEquipment)
+            foreach (Items item in items)
             {
-                result += attackItem.AttackValue();
+                result += item.AttackValue();
             }
             return result;
         }
@@ -75,9 +51,9 @@ namespace RoleplayGame
         public virtual int GetTotalDefenseValue()
         {
             int result = 0;
-            foreach (IDefensiveItems defensiveItem in defensiveEquipment)
+            foreach (Items item in items)
             {
-                result += defensiveItem.DefenseValue();
+                result += item.DefenseValue();
             }
             return result;
         }

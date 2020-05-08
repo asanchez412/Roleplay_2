@@ -10,30 +10,26 @@
 // Aclaramos que el método ReceiveAttack no retorna un valor de cuánto
 // daño se recibió sino de la vida restante de los personajes.
 
-public interface ICharacter
+namespace RoleplayGame
+
 {
+    public interface ICharacter
+    {
 
-    int Health { get; set; }
+        int Health { get; set; }
 
-    string Name { get; set; }
+        string Name { get; set; }
 
-    void EquipDefensiveItem(IDefensiveItems defensiveItem);
+        void EquipItem(Items item);
 
-    void UnEquipDefensiveItem(IDefensiveItems defensiveItem);
+        void UnEquipItem(Items item);
 
-    void EquipAttackItem(IAttackItems attackItem);
+        int GetTotalAttackValue();
 
-    void UnEquipAttackItem(IAttackItems attackItem);
+        int GetTotalDefenseValue();
 
-    void EquipMixedItem(IMixedItems mixedItem);
+        int ReceiveAttack(int damage);
 
-    void UnEquipMixedItem(IMixedItems mixedItem);
-
-    int GetTotalAttackValue();
-
-    int GetTotalDefenseValue();
-
-    int ReceiveAttack(int damage);
-
-    int Cure();
+        int Cure();
+    }
 }

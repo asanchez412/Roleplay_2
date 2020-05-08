@@ -1,13 +1,13 @@
 namespace RoleplayGame
 {
-    public class WoodStaff : IMixedItems
+    public class WoodStaff : Items
     {
-        public int AttackValue()
+        public override int AttackValue()
         {
             return 50;
         }
 
-        public int DefenseValue()
+        public override int DefenseValue()
         {
             return 50;
         }

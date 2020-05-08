@@ -23,15 +23,8 @@ namespace RoleplayGame
 
         public override int GetTotalAttackValue()
         {
-            int result = 0;
-            foreach (IAttackItems attackItems in offensiveEquipment)
-            {
-                result += attackItems.AttackValue();
-            }
-            foreach (IMixedItems mixedItem in mixedEquipment)
-            {
-                result += mixedItem.AttackValue();
-            }
+            int result = base.GetTotalAttackValue();
+            
             if (spellsBookList.Count == 1)
             {
                 foreach (SpellsBook spellsBook in spellsBookList)
@@ -44,15 +37,8 @@ namespace RoleplayGame
 
         public override int GetTotalDefenseValue()
         {
-            int result = 0;
-            foreach (IDefensiveItems defensiveItem in defensiveEquipment)
-            {
-                result += defensiveItem.DefenseValue();
-            }
-            foreach (IMixedItems mixedItem in mixedEquipment)
-            {
-                result += mixedItem.DefenseValue();
-            }
+            int result = base.GetTotalAttackValue();
+
             if (spellsBookList.Count == 1)
             {
                 foreach (SpellsBook spellsBook in spellsBookList)
